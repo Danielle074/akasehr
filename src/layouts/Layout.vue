@@ -89,7 +89,7 @@
     </Sheet>
 
     <!-- Main Content -->
-    <main class="flex-1 pt-14 sm:pt-16 lg:pt-20">
+    <main class="flex-1">
       <router-view />
     </main>
 
