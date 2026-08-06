@@ -34,7 +34,7 @@
             <p class="text-gray-500 text-sm">Fax : 27.20.22.88.66</p>
           </div>
 
-          <!-- Email - MIS À JOUR -->
+          <!-- Email -->
           <div class="group bg-gray-50 rounded-2xl p-8 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
             <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-amber-500 transition-colors duration-300">
               <Mail class="w-8 h-8 text-amber-500 group-hover:text-white transition-colors duration-300" />
@@ -246,7 +246,6 @@ import {
   Mail, 
   MapPin, 
   Send, 
-  Building2, 
   Clock, 
   Share2,
   Facebook,

@@ -212,7 +212,6 @@ import {
   Phone, 
   Mail, 
   Send, 
-  Building2, 
   Award, 
   Users, 
   Lightbulb, 
