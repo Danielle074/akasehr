@@ -14,7 +14,7 @@
           À propos de <span class="text-amber-400 font-bold">nous</span>
         </h1>
         <p class="text-xl text-white/70 font-light max-w-2xl mx-auto">
-          Découvrez l'histoire et l'expertise du Cabinet Aka Sehr
+          Découvrez l'histoire et l'expertise du Cabinet AKA SEHR Architecte
         </p>
       </div>
     </section>
@@ -29,7 +29,7 @@
               <img 
                 :src="founderImage" 
                 alt="Aka Sehr Ernest - Architecte"
-                class="w-full h-500px object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                class="w-full h-[500px] object-cover object-top transition-transform duration-700 group-hover:scale-105"
               />
               <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
@@ -54,8 +54,9 @@
             <div class="prose prose-lg text-gray-600 space-y-4">
               <p>
                 Spécialisé dans la <strong>conception</strong>, les <strong>dossiers de permis de construire</strong> 
-                et le <strong>suivi de chantier</strong>, le <strong>Cabinet Aka Sehr</strong> est une référence 
-                en architecture d'intérieur et toutes les autres formes d'architecture depuis <strong>1995</strong>.
+                et le <strong>suivi de chantier</strong>, <strong>Cabinet AKA SEHR Architecte</strong> exerce les activités d'Architecture et toutes autres activités connexes
+                métier d'architecte depuis
+                <strong>1995</strong>.
               </p>
               <p>
                 Dirigé par l'<strong>Architecte Aka Sehr Ernest</strong>, inscrit à l'<strong>Ordre des Architectes 
@@ -139,10 +140,11 @@
       </div>
     </section>
 
-    <!-- Localisation -->
-    <section class="py-20 bg-gray-900 text-white">
+    <!-- Localisation avec Google Maps -->
+    <section class="py-20 bg-black text-white">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="grid md:grid-cols-2 gap-12 items-start">
+          <!-- Texte avec coordonnées mises à jour -->
           <div>
             <span class="text-amber-400 text-sm font-semibold tracking-wider uppercase">Nous trouver</span>
             <h2 class="text-4xl font-light mt-4 mb-6">
@@ -161,14 +163,16 @@
                 <Phone class="w-6 h-6 text-amber-400 mt-1 flex-shrink-0" />
                 <div>
                   <p class="font-medium text-white">Téléphone</p>
-                  <p>+225 01 23 45 67 89</p>
+                  <p>Cel. : 05.05.05.13.05</p>
+                  <p class="text-gray-400 text-sm">Tél. : 27.20.22.77.09</p>
+                  <p class="text-gray-400 text-sm">Fax : 27.20.22.88.66</p>
                 </div>
               </div>
               <div class="flex items-start gap-4">
                 <Mail class="w-6 h-6 text-amber-400 mt-1 flex-shrink-0" />
                 <div>
                   <p class="font-medium text-white">Email</p>
-                  <p>contact@akasehr.ci</p>
+                  <p>contact@akasehrarchitecte.ci</p>
                 </div>
               </div>
             </div>
@@ -182,17 +186,17 @@
             </RouterLink>
           </div>
 
-          <!-- Carte -->
-          <div class="relative rounded-2xl overflow-hidden shadow-2xl h-400px bg-gradient-to-br from-amber-500/20 to-amber-600/10 flex items-center justify-center border border-white/10">
-            <div class="text-center">
-              <Building2 class="w-24 h-24 text-amber-400/50 mx-auto mb-4" />
-              <p class="text-white/60 text-lg font-light">Cabinet Aka Sehr</p>
-              <p class="text-amber-400 text-sm mt-2">Abidjan, Angré 8ème Tranche</p>
-              <div class="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-amber-400/10 rounded-full border border-white/10">
-                <MapPin class="w-4 h-4 text-amber-400" />
-                <span class="text-white/80 text-sm">Carrefour Pri, A15</span>
-              </div>
-            </div>
+          <!-- Google Maps -->
+          <div class="relative rounded-2xl overflow-hidden shadow-2xl h-[400px] lg:h-[450px] border border-white/10">
+            <iframe
+              class="w-full h-full"
+              style="border:0;"
+              loading="lazy"
+              allowfullscreen
+              referrerpolicy="no-referrer-when-downgrade"
+              :src="googleMapsUrl"
+              title="Cabinet Aka Sehr - Localisation"
+            ></iframe>
           </div>
         </div>
       </div>
@@ -224,6 +228,9 @@ import {
 // Import des images
 import aboutHero from '@/assets/images/hero-bg.jpg'
 import founderImage from '@/assets/images/founder.png'
+
+// URL Google Maps
+const googleMapsUrl = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3972.581289538286!2d-4.008309!3d5.359831!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfc1e45b65df543d%3A0x5b4b2f4c8b7d6a9f!2sAngr%C3%A9%208%C3%A8me%20Tranche%2C%20Abidjan%2C%20C%C3%B4te%20d%27Ivoire!5e0!3m2!1sfr!2sfr!4v1700000000000'
 
 // Valeurs
 const values = [
@@ -294,5 +301,15 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* Style pour la carte */
+iframe {
+  filter: brightness(0.9) contrast(1.1);
+  transition: filter 0.3s ease;
+}
+
+iframe:hover {
+  filter: brightness(1) contrast(1);
 }
 </style>

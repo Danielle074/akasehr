@@ -6,7 +6,7 @@
         class="absolute inset-0 bg-cover bg-center bg-no-repeat"
         :style="{ backgroundImage: `url(${contactHero})` }"
       >
-        <div class="absolute inset-0 bg-linear-to-r from-black/80 via-black/60 to-black/40" />
+        <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
       </div>
       
       <div class="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -29,17 +29,18 @@
               <Phone class="w-8 h-8 text-amber-500 group-hover:text-white transition-colors duration-300" />
             </div>
             <h3 class="text-lg font-semibold text-gray-900 mb-2">Téléphone</h3>
-            <p class="text-gray-600">+225 01 23 45 67 89</p>
-            <p class="text-gray-500 text-sm">Lun-Ven, 8h-18h</p>
+            <p class="text-gray-600">Cel. : 05.05.05.13.05</p>
+            <p class="text-gray-600">Tél. : 27.20.22.77.09</p>
+            <p class="text-gray-500 text-sm">Fax : 27.20.22.88.66</p>
           </div>
 
-          <!-- Email -->
+          <!-- Email - MIS À JOUR -->
           <div class="group bg-gray-50 rounded-2xl p-8 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
             <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-amber-500 transition-colors duration-300">
               <Mail class="w-8 h-8 text-amber-500 group-hover:text-white transition-colors duration-300" />
             </div>
             <h3 class="text-lg font-semibold text-gray-900 mb-2">Email</h3>
-            <p class="text-gray-600">contact@akasehr.ci</p>
+            <p class="text-gray-600">contact@akasehrarchitecte.ci</p>
             <p class="text-gray-500 text-sm">Réponse sous 24h</p>
           </div>
 
@@ -56,8 +57,8 @@
       </div>
     </section>
 
-    <!-- Formulaire de contact + Carte -->
-    <section class="py-20 bg-linear-to-b from-gray-50 to-white">
+    <!-- Formulaire de contact + Google Maps -->
+    <section class="py-20 bg-gradient-to-b from-gray-50 to-white">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid lg:grid-cols-2 gap-12">
           <!-- Formulaire -->
@@ -109,7 +110,7 @@
                   v-model="form.phone"
                   type="tel"
                   class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-300 outline-none"
-                  placeholder="+225 01 23 45 67 89"
+                  placeholder="05.05.05.13.05"
                 />
               </div>
 
@@ -158,30 +159,19 @@
             </form>
           </div>
 
-          <!-- Carte et informations -->
+          <!-- Google Maps et informations -->
           <div class="space-y-8">
-            <!-- Carte -->
-            <div class="relative rounded-2xl overflow-hidden shadow-2xl h-400px bg-linear-to-br from-amber-500/20 to-amber-600/10 flex items-center justify-center border border-gray-200">
-              <div class="text-center">
-                <Building2 class="w-24 h-24 text-amber-400/50 mx-auto mb-4" />
-                <p class="text-gray-700 text-lg font-light">Cabinet Aka Sehr</p>
-                <p class="text-amber-500 text-sm font-medium mt-2">Abidjan, Angré 8ème Tranche</p>
-                <div class="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-amber-100 rounded-full">
-                  <MapPin class="w-4 h-4 text-amber-500" />
-                  <span class="text-gray-700 text-sm">📍 Carrefour Pri, A15</span>
-                </div>
-                <div class="mt-6 flex justify-center gap-4">
-                  <a href="#" class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-amber-500 transition-colors duration-300 group">
-                    <Phone class="w-4 h-4 text-gray-600 group-hover:text-white transition-colors duration-300" />
-                  </a>
-                  <a href="#" class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-amber-500 transition-colors duration-300 group">
-                    <Mail class="w-4 h-4 text-gray-600 group-hover:text-white transition-colors duration-300" />
-                  </a>
-                  <a href="#" class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-amber-500 transition-colors duration-300 group">
-                    <MapPin class="w-4 h-4 text-gray-600 group-hover:text-white transition-colors duration-300" />
-                  </a>
-                </div>
-              </div>
+            <!-- Google Maps -->
+            <div class="relative rounded-2xl overflow-hidden shadow-2xl h-[400px] border border-gray-200">
+              <iframe
+                class="w-full h-full"
+                style="border:0;"
+                loading="lazy"
+                allowfullscreen
+                referrerpolicy="no-referrer-when-downgrade"
+                :src="googleMapsUrl"
+                title="Cabinet Aka Sehr - Localisation"
+              ></iframe>
             </div>
 
             <!-- Horaires -->
@@ -193,14 +183,10 @@
               <div class="space-y-2 text-gray-600">
                 <div class="flex justify-between py-2 border-b border-gray-100">
                   <span>Lundi - Vendredi</span>
-                  <span class="font-medium">8h00 - 18h00</span>
-                </div>
-                <div class="flex justify-between py-2 border-b border-gray-100">
-                  <span>Samedi</span>
-                  <span class="font-medium">9h00 - 13h00</span>
+                  <span class="font-medium">08H00 - 17H00</span>
                 </div>
                 <div class="flex justify-between py-2">
-                  <span>Dimanche</span>
+                  <span>Samedi - Dimanche</span>
                   <span class="font-medium text-gray-400">Fermé</span>
                 </div>
               </div>
@@ -233,7 +219,7 @@
     </section>
 
     <!-- Call to Action -->
-    <section class="py-16 bg-linear-to-r from-amber-500 to-amber-600">
+    <section class="py-16 bg-black text-white">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 class="text-3xl md:text-4xl font-light text-white mb-4">
           Prêt à concrétiser votre <span class="font-bold">projet</span> ?
@@ -242,7 +228,7 @@
           Contactez-nous dès maintenant pour un premier échange
         </p>
         <a 
-          href="tel:+2250123456789"
+          href="tel:+2250505051305"
           class="inline-flex items-center gap-2 px-8 py-4 bg-white text-amber-500 hover:bg-gray-100 rounded-full font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
         >
           <Phone class="w-5 h-5" />
@@ -270,8 +256,10 @@ import {
 } from 'lucide-vue-next'
 
 // ✅ IMPORT DE L'IMAGE HERO
-// Use direct public-relative path to avoid TypeScript "import.meta" module issues
-const contactHero = '/src/assets/images/hero-bg.jpg'
+import contactHero from '@/assets/images/hero-bg.jpg'
+
+// ✅ URL Google Maps - Angré 8ème Tranche, Carrefour Pri, A15
+const googleMapsUrl = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3972.581289538286!2d-4.008309!3d5.359831!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfc1e45b65df543d%3A0x5b4b2f4c8b7d6a9f!2sAngr%C3%A9%208%C3%A8me%20Tranche%2C%20Abidjan%2C%20C%C3%B4te%20d%27Ivoire!5e0!3m2!1sfr!2sfr!4v1700000000000'
 
 // État du formulaire
 const form = ref({
@@ -323,5 +311,15 @@ input:focus, select:focus, textarea:focus {
 /* Animation des cartes */
 .group {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Style pour la carte */
+iframe {
+  filter: brightness(0.95) contrast(1.05);
+  transition: filter 0.3s ease;
+}
+
+iframe:hover {
+  filter: brightness(1) contrast(1);
 }
 </style>

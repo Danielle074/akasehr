@@ -208,7 +208,7 @@
     </section>
 
     <!-- Call to Action -->
-    <section class="py-20 bg-gradient-to-b from-gray-900 to-gray-800 text-white">
+    <section class="py-20 bg-black text-white">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 class="text-4xl md:text-5xl font-light mb-6">
           Vous êtes intéressé par <span class="text-amber-400 font-bold">cette promotion</span> ?

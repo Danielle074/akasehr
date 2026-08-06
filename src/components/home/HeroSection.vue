@@ -42,7 +42,7 @@
     <div class="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl mx-auto text-center">
         <!-- Badge -->
-        <div class="inline-block mb-6 px-6 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
+        <div class="inline-block mt-12 px-6 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
           <span class="text-white/80 text-sm tracking-wider uppercase font-light">
             Architecture & Design
           </span>
@@ -52,7 +52,7 @@
         <h1 class="hero-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light text-white mb-6 leading-tight">
           <span class="block">Cabinet</span>
           <span class="block text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-yellow-100 to-amber-200 font-bold">
-            Aka Sehr
+            AKA SEHR ARCHITECTE
           </span>
         </h1>
 

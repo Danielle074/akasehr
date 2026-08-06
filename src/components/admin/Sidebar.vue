@@ -19,7 +19,7 @@
 
     <!-- Sidebar -->
     <aside 
-      class="sidebar fixed top-0 left-0 h-full bg-gray-900 text-white transition-all duration-300 z-50 shadow-2xl"
+      class="sidebar fixed top-0 left-0 h-full bg-black text-white transition-all duration-300 z-50 shadow-2xl"
       :class="[
         isCollapsed ? 'w-20' : 'w-72',
         isMobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
@@ -45,8 +45,8 @@
         </RouterLink>
       </div>
 
-      <!-- Navigation -->
-      <nav class="flex-1 overflow-y-auto py-4 px-3">
+      <!-- Navigation avec scrollbar -->
+      <nav class="flex-1 overflow-y-auto py-4 px-3 sidebar-scroll">
         <ul class="space-y-1">
           <!-- Tableau de bord -->
           <li>
@@ -403,27 +403,31 @@ onUnmounted(() => {
   overflow: hidden;
   box-shadow: 4px 0 30px rgba(0, 0, 0, 0.3);
   transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
 }
 
-.sidebar::-webkit-scrollbar {
+/* Scrollbar pour la navigation */
+.sidebar-scroll {
+  overflow-y: auto;
+  flex: 1;
+}
+
+.sidebar-scroll::-webkit-scrollbar {
   width: 4px;
 }
 
-.sidebar::-webkit-scrollbar-track {
+.sidebar-scroll::-webkit-scrollbar-track {
   background: #1a1a1a;
 }
 
-.sidebar::-webkit-scrollbar-thumb {
+.sidebar-scroll::-webkit-scrollbar-thumb {
   background: #4a4a4a;
   border-radius: 4px;
 }
 
-.sidebar::-webkit-scrollbar-thumb:hover {
+.sidebar-scroll::-webkit-scrollbar-thumb:hover {
   background: #6a6a6a;
-}
-
-.sidebar * {
-  transition: all 0.2s ease;
 }
 
 /* Styles des liens */

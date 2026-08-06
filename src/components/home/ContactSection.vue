@@ -1,5 +1,5 @@
 <template>
-  <section class="py-20 bg-gradient-to-b from-gray-900 to-gray-800 text-white">
+  <section class="py-20 bg-black text-white">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid md:grid-cols-2 gap-12 items-center">
         <!-- Texte -->
@@ -13,33 +13,39 @@
           </p>
           
           <div class="space-y-4">
+            <!-- Téléphone -->
             <div class="flex items-center gap-4">
               <div class="w-12 h-12 bg-amber-400/10 rounded-full flex items-center justify-center">
                 <Phone class="w-5 h-5 text-amber-400" />
               </div>
               <div>
                 <p class="text-sm text-gray-400">Téléphone</p>
-                <p class="font-medium">+225 01 23 45 67 89</p>
+                <p class="font-medium">Cel. : 05.05.05.13.05</p>
+                <p class="text-sm text-gray-400">Tél. : 27.20.22.77.09</p>
+                <p class="text-sm text-gray-400">Fax : 27.20.22.88.66</p>
               </div>
             </div>
             
+            <!-- Email -->
             <div class="flex items-center gap-4">
               <div class="w-12 h-12 bg-amber-400/10 rounded-full flex items-center justify-center">
                 <Mail class="w-5 h-5 text-amber-400" />
               </div>
               <div>
                 <p class="text-sm text-gray-400">Email</p>
-                <p class="font-medium">contact@akasehr.ci</p>
+                <p class="font-medium">contact@akasehrarchitecte.ci</p>
               </div>
             </div>
             
+            <!-- Adresse -->
             <div class="flex items-center gap-4">
               <div class="w-12 h-12 bg-amber-400/10 rounded-full flex items-center justify-center">
                 <MapPin class="w-5 h-5 text-amber-400" />
               </div>
               <div>
                 <p class="text-sm text-gray-400">Adresse</p>
-                <p class="font-medium">Abidjan, Côte d'Ivoire</p>
+                <p class="font-medium">Abidjan, Angré 8ème Tranche</p>
+                <p class="text-sm text-gray-400">Carrefour Pri, A15</p>
               </div>
             </div>
           </div>

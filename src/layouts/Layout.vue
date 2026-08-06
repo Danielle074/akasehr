@@ -3,53 +3,60 @@
     <!-- Navbar Flottante Premium -->
     <header 
       ref="navbarRef"
-      class="navbar-floating fixed top-3 sm:top-4 lg:top-5 left-1/2 -translate-x-1/2 z-[9999] w-[94%] sm:w-[92%] max-w-7xl transition-all duration-500 ease-in-out"
+      class="navbar-floating fixed top-0 left-0 w-full z-[9999] transition-all duration-500 ease-in-out"
       :class="[
-        isScrolled ? 'shadow-2xl bg-white/90 backdrop-blur-xl border-white/30' : 'shadow-lg bg-white/75 backdrop-blur-md border-white/20'
+        isNavbarVisible ? (isScrolled ? 'shadow-2xl bg-white/90 backdrop-blur-xl' : 'shadow-lg bg-white/75 backdrop-blur-md') : 'bg-transparent backdrop-blur-none shadow-none'
       ]"
+      @mouseenter="showNavbar"
+      @mouseleave="hideNavbar"
     >
-      <div class="flex items-center justify-between h-14 sm:h-16 lg:h-20 px-4 sm:px-6 lg:px-8">
-        <!-- Logo -->
-        <RouterLink to="/" class="flex items-center shrink-0 group">
-          <img 
-            :src="logo" 
-            alt="Cabinet Aka Sehr - Architecture & Immobilier de Luxe" 
-            class="h-8 sm:h-10 lg:h-12 w-auto transition-all duration-500 group-hover:scale-105"
-          />
-        </RouterLink>
-
-        <!-- Desktop Navigation -->
-        <nav class="hidden lg:flex items-center space-x-1 xl:space-x-2">
-          <!-- Lien Accueil -->
-          <RouterLink 
-            to="/"
-            class="nav-link"
-          >
-            Accueil
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-14 sm:h-16 lg:h-20">
+          <!-- Logo -->
+          <RouterLink to="/" class="flex items-center shrink-0 group">
+            <img 
+              :src="logo" 
+              alt="Cabinet Aka Sehr - Architecture & Immobilier de Luxe" 
+              class="h-12 sm:h-12 lg:h-16 w-auto transition-all duration-500 group-hover:scale-105"
+            />
           </RouterLink>
-          <RouterLink 
-            v-for="link in navLinks" 
-            :key="link.to"
-            :to="link.to"
-            class="nav-link"
-            :class="{ 'admin-btn': link.isAdmin }"
-          >
-            {{ link.label }}
-          </RouterLink>
-        </nav>
 
-        <!-- Mobile Menu Button -->
-        <button 
-          class="lg:hidden p-1.5 sm:p-2 rounded-full transition-all duration-300 hover:bg-gray-100/80"
-          @click="mobileMenuOpen = true"
-          aria-label="Menu"
-        >
-          <Menu class="w-5 h-5 sm:w-6 sm:h-6 text-gray-700 transition-colors duration-300" />
-        </button>
+          <!-- Desktop Navigation -->
+          <nav 
+            class="hidden lg:flex items-center space-x-1 xl:space-x-2 transition-all duration-500 ease-in-out"
+            :class="isNavbarVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'"
+          >
+            <RouterLink 
+              to="/"
+              class="nav-link"
+            >
+              Accueil
+            </RouterLink>
+            <RouterLink 
+              v-for="link in navLinks" 
+              :key="link.to"
+              :to="link.to"
+              class="nav-link"
+              :class="{ 'admin-btn': link.isAdmin }"
+            >
+              {{ link.label }}
+            </RouterLink>
+          </nav>
+
+          <!-- Mobile Menu Button -->
+          <button 
+            class="lg:hidden p-1.5 sm:p-2 rounded-lg transition-all duration-300"
+            :class="!isNavbarVisible ? 'bg-white/20 hover:bg-white/30' : 'hover:bg-gray-100/80'"
+            @click="mobileMenuOpen = true"
+            aria-label="Menu"
+          >
+            <Menu class="w-5 h-5 sm:w-6 sm:h-6 transition-colors duration-300" :class="isNavbarVisible ? 'text-gray-700' : 'text-white'" />
+          </button>
+        </div>
       </div>
 
       <!-- Bordure décorative subtile -->
-      <div class="absolute bottom-0 left-6 sm:left-8 right-6 sm:right-8 h-px bg-gradient-to-r from-transparent via-amber-200/30 to-transparent"></div>
+      <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-200/30 to-transparent" :class="!isNavbarVisible ? 'opacity-0' : ''"></div>
     </header>
 
     <!-- Mobile Menu (Sheet) -->
@@ -64,7 +71,6 @@
           </div>
           
           <nav class="flex flex-col space-y-4 sm:space-y-5">
-            <!-- Lien Accueil en premier -->
             <RouterLink 
               to="/"
               class="text-base sm:text-lg font-medium text-gray-700 hover:text-amber-500 transition-colors duration-300 px-4 py-2.5 rounded-lg hover:bg-amber-50 border-b border-gray-100/50"
@@ -174,6 +180,10 @@ import footerImage from '@/assets/images/footerimage.jpg'
 // États
 const isScrolled = ref(false)
 const mobileMenuOpen = ref(false)
+const isNavbarVisible = ref(true)
+
+// Timer pour cacher la navbar
+let hideTimeout: ReturnType<typeof setTimeout> | null = null
 
 // Navigation links (sans Accueil car il est séparé)
 const navLinks = [
@@ -202,91 +212,86 @@ const handleScroll = () => {
   isScrolled.value = window.scrollY > 50
 }
 
+// Afficher la navbar
+const showNavbar = () => {
+  if (hideTimeout) {
+    clearTimeout(hideTimeout)
+    hideTimeout = null
+  }
+  isNavbarVisible.value = true
+}
+
+// Cacher la navbar après un délai
+const hideNavbar = () => {
+  // Ne pas cacher si le menu mobile est ouvert
+  if (mobileMenuOpen.value) return
+  
+  hideTimeout = setTimeout(() => {
+    isNavbarVisible.value = false
+  }, 1500) // Délai de 1.5s avant de cacher
+}
+
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
+  isNavbarVisible.value = true
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
+  if (hideTimeout) {
+    clearTimeout(hideTimeout)
+  }
 })
 </script>
 
 <style scoped>
-/* ===== NAVBAR FLOTTANTE ===== */
+/* ===== NAVBAR ===== */
 .navbar-floating {
-  border: 1px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: 50px !important;
-  overflow: hidden;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-/* Conteneur interne aussi arrondi */
-.navbar-floating > div {
-  border-radius: 50px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Survol - effet de brillance */
 .navbar-floating:hover {
-  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.12);
-  border-color: rgba(255, 255, 255, 0.3);
-}
-
-/* Effet de brillance subtil au survol */
-.navbar-floating::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 50px !important;
-  padding: 1px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.4), transparent 50%, rgba(255,255,255,0.1));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-
-.navbar-floating:hover::before {
-  opacity: 1;
-}
-
-/* Effet de brillance au survol */
-.navbar-floating::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-  opacity: 0;
-  transition: opacity 0.8s ease;
-  pointer-events: none;
-  border-radius: 50px !important;
-}
-
-.navbar-floating:hover::after {
-  opacity: 1;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 /* ===== NAVIGATION LINKS ===== */
 .nav-link {
   position: relative;
   padding: 0.5rem 1.2rem;
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   font-weight: 500;
-  color: #374151;
   transition: all 0.3s ease;
   text-decoration: none;
   letter-spacing: 0.04em;
   border-radius: 9999px;
 }
 
+/* Couleurs des liens en mode visible (fond blanc) */
+.navbar-floating:not(.bg-transparent) .nav-link {
+  color: #374151;
+}
+
+.navbar-floating:not(.bg-transparent) .nav-link:hover {
+  color: #000000;
+  background: rgba(245, 158, 11, 0.08);
+}
+
+/* Couleurs des liens en mode transparent (fond transparent) */
+.navbar-floating.bg-transparent .nav-link {
+  color: #ffffff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-floating.bg-transparent .nav-link:hover {
+  color: #fbbf24;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Soulignement animé */
 .nav-link::after {
   content: '';
   position: absolute;
@@ -300,37 +305,50 @@ onUnmounted(() => {
   border-radius: 2px;
 }
 
-.nav-link:hover {
-  color: #1a1a1a;
-  background: rgba(245, 158, 11, 0.06);
-}
-
 .nav-link:hover::after {
   width: 60%;
 }
 
 /* ===== ADMIN BUTTON ===== */
 .admin-btn {
-  background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
-  color: white !important;
   padding: 0.5rem 1.8rem;
   border-radius: 9999px;
   font-weight: 600;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   margin-left: 0.5rem;
   letter-spacing: 0.05em;
+}
+
+/* Mode visible (fond blanc) */
+.navbar-floating:not(.bg-transparent) .admin-btn {
+  background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+  color: white !important;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.admin-btn::after {
-  display: none !important;
-}
-
-.admin-btn:hover {
+.navbar-floating:not(.bg-transparent) .admin-btn:hover {
   background: linear-gradient(135deg, #000000, #1a1a1a);
   transform: translateY(-2px) scale(1.02);
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* Mode transparent */
+.navbar-floating.bg-transparent .admin-btn {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white !important;
+  box-shadow: none;
+}
+
+.navbar-floating.bg-transparent .admin-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px) scale(1.02);
+}
+
+.admin-btn::after {
+  display: none !important;
 }
 
 /* ===== MOBILE ADMIN BUTTON ===== */
@@ -350,68 +368,6 @@ onUnmounted(() => {
   background: linear-gradient(135deg, #000000, #1a1a1a);
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 1024px) {
-  .navbar-floating {
-    width: 94%;
-    top: 16px;
-    border-radius: 40px !important;
-  }
-  
-  .navbar-floating > div {
-    border-radius: 40px !important;
-  }
-  
-  .navbar-floating::before {
-    border-radius: 40px !important;
-  }
-  
-  .navbar-floating::after {
-    border-radius: 40px !important;
-  }
-}
-
-@media (max-width: 768px) {
-  .navbar-floating {
-    width: 96%;
-    top: 12px;
-    border-radius: 28px !important;
-    padding: 0 4px;
-  }
-  
-  .navbar-floating > div {
-    border-radius: 28px !important;
-  }
-  
-  .navbar-floating::before {
-    border-radius: 28px !important;
-  }
-  
-  .navbar-floating::after {
-    border-radius: 28px !important;
-  }
-}
-
-@media (max-width: 480px) {
-  .navbar-floating {
-    width: 97%;
-    top: 10px;
-    border-radius: 24px !important;
-  }
-  
-  .navbar-floating > div {
-    border-radius: 24px !important;
-  }
-  
-  .navbar-floating::before {
-    border-radius: 24px !important;
-  }
-  
-  .navbar-floating::after {
-    border-radius: 24px !important;
-  }
 }
 
 /* ===== SCROLLBAR ===== */
@@ -454,5 +410,13 @@ footer {
 button:focus-visible {
   outline: 2px solid #1a1a1a;
   outline-offset: 2px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-link {
+    font-size: 0.8125rem;
+    padding: 0.4rem 0.8rem;
+  }
 }
 </style>
